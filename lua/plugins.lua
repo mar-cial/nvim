@@ -13,7 +13,7 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  
+
   -- surround
   use 'tpope/vim-surround'
 
@@ -23,8 +23,15 @@ return require('packer').startup(function(use)
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+  -- lsp
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  }
+
   -- theme
-  use 'folke/tokyonight.nvim' 
+  use 'folke/tokyonight.nvim'
 
   if packer_bootstrap then
     require('packer').sync()
