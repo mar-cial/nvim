@@ -45,6 +45,10 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
+	-- file explorer
+	use("nvim-tree/nvim-tree.lua")
+	use("nvim-tree/nvim-web-devicons") -- this is moved here, idk if to remove
+
 	-- theme
 	use("sainnhe/everforest")
 
