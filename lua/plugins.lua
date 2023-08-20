@@ -46,7 +46,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- theme
-	use("folke/tokyonight.nvim")
+	use("sainnhe/everforest")
 
 	if packer_bootstrap then
 		require("packer").sync()
