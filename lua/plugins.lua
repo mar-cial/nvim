@@ -21,9 +21,6 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
-	-- surround
-	use("tpope/vim-surround")
-
 	-- lualine
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -41,6 +38,12 @@ return require("packer").startup(function(use)
 
 	-- plenary, for some reason...
 	use("nvim-lua/plenary.nvim")
+
+	-- tree sitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+	})
 
 	-- theme
 	use("folke/tokyonight.nvim")
