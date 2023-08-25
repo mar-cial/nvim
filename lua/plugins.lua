@@ -45,6 +45,16 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 
+	-- add brackets/curly/parenthesis automatically
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
+	})
+
 	-- file explorer
 	use("nvim-tree/nvim-tree.lua")
 	use("nvim-tree/nvim-web-devicons") -- this is moved here, idk if to remove
