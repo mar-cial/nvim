@@ -17,7 +17,7 @@ vim.api.nvim_set_keymap("n", "\\", ":lua toggleTree()<CR>", { noremap = true, si
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
 	view = {
-		width = 25,
+		width = 35,
 	},
 	renderer = {
 		group_empty = true,

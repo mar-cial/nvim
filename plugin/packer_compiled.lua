@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/home/cesar/.local/share/nvim/site/pack/packer/start/everforest",
     url = "https://github.com/sainnhe/everforest"
   },
+  ["headwind.nvim"] = {
+    loaded = true,
+    path = "/home/cesar/.local/share/nvim/site/pack/packer/start/headwind.nvim",
+    url = "https://github.com/steelsojka/headwind.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/cesar/.local/share/nvim/site/pack/packer/start/lualine.nvim",
