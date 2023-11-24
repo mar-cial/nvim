@@ -7,6 +7,7 @@ vim.opt.laststatus = 2
 vim.opt.autowrite = true
 vim.opt.autoread = true
 vim.opt.number = true
+vim.opt.signcolumn = "yes"
 
 -- spaces
 vim.opt.tabstop = 2
