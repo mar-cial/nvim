@@ -1,1 +1,2 @@
-vim.cmd("colorscheme everforest")
+vim.opt.termguicolors = true
+vim.cmd.colorscheme 'melange'
