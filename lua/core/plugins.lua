@@ -38,6 +38,9 @@ return require('packer').startup(function(use)
 
         use 'nvimtools/none-ls.nvim'
 
+        use 'ray-x/go.nvim'
+        use 'ray-x/guihua.lua'
+
         if packer_bootstrap then
                 require('packer').sync()
         end
