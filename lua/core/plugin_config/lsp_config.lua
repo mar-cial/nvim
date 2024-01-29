@@ -23,7 +23,7 @@ cmp.setup({
         }),
         sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For vsnip users.
+                { name = 'luasnip' },
         }, {
                 { name = 'buffer' },
         })
@@ -33,11 +33,13 @@ local null_ls = require("null-ls")
 
 null_ls.setup({
         sources = {
-                null_ls.builtins.formatting.prettierd,
+                null_ls.builtins.formatting.goimports,
                 null_ls.builtins.formatting.rustywind,
+                null_ls.builtins.formatting.prettierd,
         },
 })
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
                 vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -53,7 +55,6 @@ local on_attach = function(client, bufnr)
         end
 end
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
         -- you can reuse a shared lspconfig on_attach callback here
         on_attach = on_attach
@@ -75,6 +76,26 @@ require("lspconfig").tailwindcss.setup {
         on_attach = on_attach
 }
 require("lspconfig").gopls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").jsonls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").rust_analyzer.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").emmet_ls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").html.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").htmx.setup {
         capabilities = capabilities,
         on_attach = on_attach
 }
