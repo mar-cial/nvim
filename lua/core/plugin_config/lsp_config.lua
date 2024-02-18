@@ -99,3 +99,15 @@ require("lspconfig").htmx.setup {
         capabilities = capabilities,
         on_attach = on_attach
 }
+require("lspconfig").yamlls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").dockerls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
+require("lspconfig").docker_compose_language_service.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
