@@ -111,3 +111,7 @@ require("lspconfig").docker_compose_language_service.setup {
         capabilities = capabilities,
         on_attach = on_attach
 }
+require("lspconfig").zig.setup {
+        capabilities = capabilities,
+        on_attach = on_attach
+}
