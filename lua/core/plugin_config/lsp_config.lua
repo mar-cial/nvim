@@ -5,9 +5,8 @@ local cmp = require 'cmp'
 
 cmp.setup({
         snippet = {
-                -- REQUIRED - you must specify a snippet engine
                 expand = function(args)
-                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                        require('luasnip').lsp_expand(args.body)
                 end,
         },
         window = {
@@ -111,7 +110,7 @@ require("lspconfig").docker_compose_language_service.setup {
         capabilities = capabilities,
         on_attach = on_attach
 }
-require("lspconfig").zig.setup {
+require("lspconfig").zls.setup {
         capabilities = capabilities,
         on_attach = on_attach
 }
