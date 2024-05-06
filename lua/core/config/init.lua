@@ -1,0 +1,6 @@
+require("lua.core.config.lsp")
+require("lua.core.config.theme")
+require("lua.core.config.neotree")
+require("lua.core.config.lualine")
+require("lua.core.config.telescope")
+require("lua.core.config.treesitter")
