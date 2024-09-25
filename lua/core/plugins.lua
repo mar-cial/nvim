@@ -90,6 +90,8 @@ return require('packer').startup(function(use)
 
     use 'gleam-lang/gleam.vim'
 
+    use "fatih/vim-go"
+
     if packer_bootstrap then
         require('packer').sync()
     end
