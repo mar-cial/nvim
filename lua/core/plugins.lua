@@ -92,6 +92,8 @@ return require('packer').startup(function(use)
 
     use "fatih/vim-go"
 
+    use "rebelot/kanagawa.nvim"
+
     if packer_bootstrap then
         require('packer').sync()
     end

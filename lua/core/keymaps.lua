@@ -9,3 +9,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.expandtab = true
+
+-- folding
+vim.opt.foldmethod = "syntax"
+vim.opt.foldlevel = 99

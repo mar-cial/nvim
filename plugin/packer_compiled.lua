@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/cesar/.cache/nvim/packer_hererocks/2.1.1725453128/share/lua/5.1/?.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1725453128/share/lua/5.1/?/init.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1725453128/lib/luarocks/rocks-5.1/?.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1725453128/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/cesar/.cache/nvim/packer_hererocks/2.1.1725453128/lib/lua/5.1/?.so"
+local package_path_str = "/home/cesar/.cache/nvim/packer_hererocks/2.1.1727870382/share/lua/5.1/?.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1727870382/share/lua/5.1/?/init.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1727870382/lib/luarocks/rocks-5.1/?.lua;/home/cesar/.cache/nvim/packer_hererocks/2.1.1727870382/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/cesar/.cache/nvim/packer_hererocks/2.1.1727870382/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -109,6 +109,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/cesar/.local/share/nvim/site/pack/packer/start/image.nvim",
     url = "https://github.com/3rd/image.nvim"
+  },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/home/cesar/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lspkind-nvim"] = {
     loaded = true,
@@ -206,8 +211,8 @@ time([[Config for mason.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-cmp ]]
-vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-path ]]
+vim.cmd [[ packadd cmp-buffer ]]
 time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
