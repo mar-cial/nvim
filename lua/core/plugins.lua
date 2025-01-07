@@ -13,7 +13,6 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-    use "savq/melange-nvim"
 
     use {
         "nvim-neo-tree/neo-tree.nvim",
@@ -92,7 +91,36 @@ return require('packer').startup(function(use)
 
     use "fatih/vim-go"
 
-    use "rebelot/kanagawa.nvim"
+    use {
+        '/home/cesar/dev/luascripts/floating-terra',
+        config = function()
+            require('floating-terra')
+        end
+    }
+
+    use {
+        "folke/lazydev.nvim",
+        config = function()
+            require("lazydev").setup()
+        end
+    }
+
+    use {
+        "mfussenegger/nvim-dap",
+        requires = {
+            "jbyuki/one-small-step-for-vimkind",
+            "leoluz/nvim-dap-go",
+            "rcarriga/nvim-dap-ui",
+            "theHamsta/nvim-dap-virtual-text",
+            "nvim-neotest/nvim-nio"
+        }
+    }
+
+    use {
+        'tomblind/local-lua-debugger-vscode'
+    }
+
+    use { "rebelot/kanagawa.nvim" }
 
     if packer_bootstrap then
         require('packer').sync()

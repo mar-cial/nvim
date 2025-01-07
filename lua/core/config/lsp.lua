@@ -30,14 +30,6 @@ cmp.setup({
 
 local null_ls = require("null-ls")
 
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.goimports,
-        null_ls.builtins.formatting.rustywind,
-        null_ls.builtins.formatting.prettierd,
-    },
-})
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -52,8 +44,12 @@ local on_attach = function(client, bufnr)
     end
 end
 
-require("null-ls").setup({
-    on_attach = on_attach
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.rustywind,
+        null_ls.builtins.formatting.prettierd,
+    },
+    on_attach = on_attach,
 })
 
 -- Set up lspconfig.
@@ -61,11 +57,78 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("lspconfig").ts_ls.setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = on_attach,
+    filetypes = { "typescriptreact", "typescript", "javascript", "tsx", "jsx" }
 }
+
 require("lspconfig").lua_ls.setup {
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = on_attach,
+    on_init = function(client)
+        if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+                return
+            end
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                }
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
+                -- library = vim.api.nvim_get_runtime_file("", true)
+            }
+        })
+    end,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Use LuaJIT as the runtime for Love2D
+                version = "LuaJIT",
+                -- Define the runtime path to include common Lua modules
+                path = {
+                    "?.lua",
+                    "?/init.lua",
+                    "./?.lua",
+                    "/usr/share/luajit-2.1/?.lua",
+                    "/usr/local/share/lua/5.1/?.lua",
+                    "/usr/local/share/lua/5.1/?/init.lua",
+                    "/usr/share/lua/5.1/?.lua",
+                    "/usr/share/lua/5.1/?/init.lua",
+                },
+            },
+            diagnostics = {
+                -- Recognize global variables `vim` and `love` to avoid false positives
+                globals = { "vim", "love" },
+            },
+            workspace = {
+                -- Add library paths for Neovim runtime and Love2D API
+                library = {
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.stdpath("config") .. "/lua"] = true,
+                    [vim.fn.expand("~/.local/share/nvim/love-api")] = true,
+                },
+                -- Do not check for third-party libraries
+                checkThirdParty = false,
+            },
+            telemetry = {
+                -- Disable telemetry to avoid data collection
+                enable = false,
+            },
+        },
+    }
 }
 require("lspconfig").tailwindcss.setup {
     capabilities = capabilities,
@@ -76,29 +139,6 @@ require("lspconfig").gopls.setup {
     on_attach = on_attach
 }
 require("lspconfig").rust_analyzer.setup {
-    capabilities = capabilities,
-    on_attach = on_attach
-}
-
-require("lspconfig").emmet_ls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    filetypes = { "html", "typescriptreact", "javascript", "javascriptreact", "jsx", "tsx", "css", "sass", "scss", "less", "templ" },
-    init_options = {
-        html = {
-            options = {
-                -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-                ["bem.enabled"] = true,
-            },
-        },
-    }
-}
-
-require("lspconfig").html.setup {
-    capabilities = capabilities,
-    on_attach = on_attach
-}
-require("lspconfig").htmx.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
@@ -126,24 +166,15 @@ require("lspconfig").clangd.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-
 require("lspconfig").pylsp.setup {
     capabilities = capabilities,
     on_attach = on_attach
 }
-require("lspconfig").templ.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-require("lspconfig").cssls.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
-require("lspconfig").gleam.setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
 require("lspconfig").terraformls.setup {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = on_attach
+}
+require("lspconfig").emmet_ls.setup {
+    capabilities = capabilities,
+    on_attach = on_attach
 }
